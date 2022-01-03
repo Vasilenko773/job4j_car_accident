@@ -4,7 +4,31 @@
 <head>
     <title>Accident</title>
 </head>
+
 <body>
-Hello : Accident
+
+
+<table class="table" border="5px double #000">
+
+    <thead>
+    <tr>
+        <th scope="col">Название</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <c:forEach items="${date}" var="value">
+        <tr>
+            <td>
+                <c:out value="${value}"/>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+
+</table>
+
+
 </body>
+
 </html>
