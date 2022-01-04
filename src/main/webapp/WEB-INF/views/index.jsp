@@ -8,7 +8,7 @@
 <body>
 
 <a href="<c:url value='/create'/>">Добавить инцидент</a>
-<a href="<c:url value='/edit'/>">Изменить инцидент</a>
+
 
 <table class="table" border="5px double #000">
 
@@ -35,7 +35,11 @@
             </td>
             <td>
                 <c:out value="${value.address}"/>
-            </td>
+
+            <td>
+            <a href="<c:url value='/edit?id=${value.id}'/>">Редактировать инцидент</a>
+        </td>
+
         </tr>
     </c:forEach>
     </tbody>

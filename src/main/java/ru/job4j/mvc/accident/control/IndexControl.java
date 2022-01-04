@@ -27,8 +27,8 @@ public class IndexControl {
 
     @GetMapping("/")
     public String index(Model model) {
-        service.add(Accident.of(1, "accident",
-                "Авария с травмой прохожего", "Свердлова 28"));
+       /* service.add(Accident.of(1, "accident",
+                "Авария с травмой прохожего", "Свердлова 28"));*/
         model.addAttribute("date", service.findByAll());
         return "index";
     }
