@@ -12,7 +12,10 @@
 
     <thead>
     <tr>
+        <th scope="col">##</th>
         <th scope="col">Название</th>
+        <th scope="col">Описание</th>
+        <th scope="col">Адресс</th>
     </tr>
     </thead>
 
@@ -20,7 +23,16 @@
     <c:forEach items="${date}" var="value">
         <tr>
             <td>
-                <c:out value="${value}"/>
+                <c:out value="${value.id}"/>
+            </td>
+            <td>
+                <c:out value="${value.name}"/>
+            </td>
+            <td>
+                <c:out value="${value.text}"/>
+            </td>
+            <td>
+                <c:out value="${value.address}"/>
             </td>
         </tr>
     </c:forEach>
