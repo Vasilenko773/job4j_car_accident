@@ -37,4 +37,10 @@ public class AccidentMem {
     public List<Accident> getAll() {
         return List.copyOf(accidents.values());
     }
+
+    public void update(int id, Accident accident) {
+        if (accidents.get(id) != null) {
+            accidents.put(id, accident);
+        }
+    }
 }

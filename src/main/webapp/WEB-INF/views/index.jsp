@@ -7,6 +7,8 @@
 
 <body>
 
+<a href="<c:url value='/create'/>">Добавить инцидент</a>
+<a href="<c:url value='/edit'/>">Изменить инцидент</a>
 
 <table class="table" border="5px double #000">
 
