@@ -36,7 +36,8 @@ public class AccidentMem {
     }
 
     public void add(Accident accident) {
-        accidents.put(position.incrementAndGet(), accident);
+        accident.setId(position.incrementAndGet());
+        accidents.put(position.get(), accident);
     }
 
     public Accident get(int id) {
@@ -67,6 +68,6 @@ public class AccidentMem {
 
     public static void main(String[] args) {
         AccidentMem accidentMem = new AccidentMem();
-        System.out.println(accidentMem.get(3).getRules().size());
+        System.out.println(accidentMem.get(3));
     }
 }
