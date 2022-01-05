@@ -19,18 +19,17 @@ public class AccidentMem {
 
     private HashMap<Integer, Accident> accidents = new HashMap<>();
 
-    private final AtomicInteger position = new AtomicInteger(0);
+    private final AtomicInteger position = new AtomicInteger(-1);
 
     public AccidentMem() {
         Accident first = new Accident(1, "First", "авария без жертв", "Варшавского");
-        Accident second = new Accident(1, "Second", "авария c травсой человека", "Шоссе 3");
+        Accident second = new Accident(2, "Second", "авария c травсой человека", "Шоссе 3");
         add(first);
         add(second);
     }
 
     public void add(Accident accident) {
-        accidents.put(position.get(), accident);
-        position.set(position.get() + 1);
+        accidents.put(position.incrementAndGet(), accident);
     }
 
     public Accident get(int id) {
