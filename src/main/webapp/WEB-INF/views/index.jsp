@@ -18,6 +18,7 @@
         <th scope="col">Название</th>
         <th scope="col">Описание</th>
         <th scope="col">Адресс</th>
+        <th scope="col">Тип</th>
     </tr>
     </thead>
 
@@ -35,6 +36,10 @@
             </td>
             <td>
                 <c:out value="${value.address}"/>
+            </td>
+            <td>
+                <c:out value="${value.type.id}"/>
+            </td>
 
             <td>
             <a href="<c:url value='/edit?id=${value.id}'/>">Редактировать инцидент</a>
