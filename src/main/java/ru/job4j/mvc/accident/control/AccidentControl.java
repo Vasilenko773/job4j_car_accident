@@ -10,6 +10,8 @@ import ru.job4j.mvc.accident.model.Accident;
 import ru.job4j.mvc.accident.model.AccidentType;
 import ru.job4j.mvc.accident.model.Rule;
 import ru.job4j.mvc.accident.repository.AccidentMem;
+import ru.job4j.mvc.accident.repository.RulesMem;
+import ru.job4j.mvc.accident.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -18,41 +20,39 @@ import java.util.stream.Collectors;
 @Controller
 public class AccidentControl {
 
-    private final AccidentMem accidents;
+    private final AccidentService service;
 
-    public AccidentControl(AccidentMem accidents) {
-        this.accidents = accidents;
+
+    public AccidentControl(AccidentService service) {
+        this.service = service;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", accidents.getAllType());
-
-        List<Rule> rules = new ArrayList<>();
-        rules.add(Rule.of(1, "Статья. 1"));
-        rules.add(Rule.of(2, "Статья. 2"));
-        rules.add(Rule.of(3, "Статья. 3"));
-        model.addAttribute("rules", rules);
+        model.addAttribute("rules", service.findByAllRule());
+        model.addAttribute("types", service.findByAllType());
         return "accident/create";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute("accident") Accident accident, HttpServletRequest req,
                        @RequestParam("type.id") int id) {
+        String[] ids = req.getParameterValues("rIds");
+        service.saveRuleList(ids, accident);
 
-        accident.setType(accidents.getType(id));
-        if (accidents.get(accident.getId()) != null) {
-            accidents.update(accident.getId(), accident);
+        accident.setType(service.getType(id));
+        if (service.get(accident.getId()) != null) {
+            service.updateAccident(accident.getId(), accident);
         } else {
-            accidents.add(accident);
+            service.add(accident);
         }
         return "redirect:/";
     }
 
     @GetMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model) {
-        model.addAttribute("types", accidents.getAllType());
-        model.addAttribute("accident", accidents.get(id));
+        model.addAttribute("types", service.findByAllType());
+        model.addAttribute("accident", service.get(id));
         return "accident/edit";
     }
 

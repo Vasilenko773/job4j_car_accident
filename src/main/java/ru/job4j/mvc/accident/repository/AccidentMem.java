@@ -30,8 +30,9 @@ public class AccidentMem {
         addType(AccidentType.of(1, "Две машины"));
         addType(AccidentType.of(2, "Машина и человек"));
         addType(AccidentType.of(3, "Машина и велосипед"));
-        add(new Accident(1, "First", "авария без жертв", "Варшавского", types.get(1)));
-        add(new Accident(2, "Second", "авария c травсой человека", "Шоссе 3", types.get(2)));
+        RulesMem rulesMem = new RulesMem();
+        add(Accident.of(1, "First", "авария без жертв", "Варшавского", types.get(1), rulesMem.getAllRule()));
+        add(Accident.of(2, "Second", "авария c травсой человека", "Шоссе 3", types.get(2), rulesMem.getAllRule()));
     }
 
     public void add(Accident accident) {
@@ -64,4 +65,8 @@ public class AccidentMem {
         return List.copyOf(types.values());
     }
 
+    public static void main(String[] args) {
+        AccidentMem accidentMem = new AccidentMem();
+        System.out.println(accidentMem.get(3).getRules().size());
+    }
 }

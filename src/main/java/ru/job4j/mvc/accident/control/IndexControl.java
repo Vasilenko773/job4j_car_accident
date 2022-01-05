@@ -21,11 +21,9 @@ public class IndexControl {
     @Autowired
     private AccidentService service;
 
-
-
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("date", service.findByAll());
+        model.addAttribute("date", service.findByAllAccident());
         return "index";
     }
 }
