@@ -21,14 +21,10 @@ public class IndexControl {
     @Autowired
     private AccidentService service;
 
-   /*private AccidentService service = new AccidentService(
-            new AccidentMem(Accident.of(1, "accident",
-            "Авария с травмой прохожего", "Свердлова 28")));*/
+
 
     @GetMapping("/")
     public String index(Model model) {
-       /* service.add(Accident.of(1, "accident",
-                "Авария с травмой прохожего", "Свердлова 28"));*/
         model.addAttribute("date", service.findByAll());
         return "index";
     }

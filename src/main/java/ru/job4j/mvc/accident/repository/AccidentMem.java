@@ -21,8 +21,11 @@ public class AccidentMem {
 
     private final AtomicInteger position = new AtomicInteger(0);
 
-    public AccidentMem(Accident accident) {
-        add(accident);
+    public AccidentMem() {
+        Accident first = new Accident(1, "First", "авария без жертв", "Варшавского");
+        Accident second = new Accident(1, "Second", "авария c травсой человека", "Шоссе 3");
+        add(first);
+        add(second);
     }
 
     public void add(Accident accident) {
