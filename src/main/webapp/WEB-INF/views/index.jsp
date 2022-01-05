@@ -39,7 +39,7 @@
                 <c:out value="${value.address}"/>
             </td>
             <td>
-                <c:out value="${value.type.id}"/>
+                <c:out value="${value.type.name}"/>
             </td>
 
             <td>

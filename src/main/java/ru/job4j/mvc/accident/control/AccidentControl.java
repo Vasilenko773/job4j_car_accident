@@ -26,11 +26,7 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        List<AccidentType> types = new ArrayList<>();
-        types.add(AccidentType.of(1, "Две машины"));
-        types.add(AccidentType.of(2, "Машина и человек"));
-        types.add(AccidentType.of(3, "Машина и велосипед"));
-        model.addAttribute("types", types);
+        model.addAttribute("types", accidents.getAllType());
 
         List<Rule> rules = new ArrayList<>();
         rules.add(Rule.of(1, "Статья. 1"));
@@ -41,7 +37,10 @@ public class AccidentControl {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("accident") Accident accident, HttpServletRequest req) {
+    public String save(@ModelAttribute("accident") Accident accident, HttpServletRequest req,
+                       @RequestParam("type.id") int id) {
+
+        accident.setType(accidents.getType(id));
         if (accidents.get(accident.getId()) != null) {
             accidents.update(accident.getId(), accident);
         } else {
@@ -52,6 +51,7 @@ public class AccidentControl {
 
     @GetMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model) {
+        model.addAttribute("types", accidents.getAllType());
         model.addAttribute("accident", accidents.get(id));
         return "accident/edit";
     }

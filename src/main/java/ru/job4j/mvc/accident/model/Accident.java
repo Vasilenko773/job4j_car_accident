@@ -25,6 +25,14 @@ public class Accident {
         this.address = address;
     }
 
+    public Accident(int id, String name, String text, String address, AccidentType type) {
+        this.id = id;
+        this.name = name;
+        this.text = text;
+        this.address = address;
+        this.type = type;
+    }
+
     public static Accident of(int id, String name, String text, String address, AccidentType type, Set<Rule> rules) {
         Accident accident = new Accident();
         accident.id = id;
@@ -94,14 +102,12 @@ public class Accident {
             return false;
         }
         Accident accident = (Accident) o;
-        return id == accident.id && Objects.equals(name, accident.name)
-                && Objects.equals(text, accident.text) && Objects.equals(address, accident.address)
-                && Objects.equals(type, accident.type);
+        return id == accident.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, text, address, type);
+        return Objects.hash(id);
     }
 
     @Override
