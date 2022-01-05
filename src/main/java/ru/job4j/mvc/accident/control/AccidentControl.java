@@ -42,17 +42,21 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute("accident") Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        Set<Rule> rsl = new HashSet<>();
-        for (int i = 0; i < ids.length; i++) {
-            rsl.add(Rule.of(i + 1, ids[i]));
+        if (accidents.get(accident.getId()) != null) {
+            accidents.update(accident.getId(), accident);
+        } else {
+            accidents.add(accident);
         }
-        accident.setRules(rsl);
-        accidents.add(accident);
         return "redirect:/";
     }
 
     @GetMapping("/edit")
+    public String edit(@RequestParam("id") int id, Model model) {
+        model.addAttribute("accident", accidents.get(id));
+        return "accident/edit";
+    }
+
+   /*@GetMapping("/edit")
     public String edit(Model model) {
         List<AccidentType> types = new ArrayList<>();
         types.add(AccidentType.of(1, "Две машины"));
@@ -66,5 +70,5 @@ public class AccidentControl {
     public String update(@RequestParam("id") String id, @ModelAttribute("accident") Accident accident) {
         accidents.update(Integer.valueOf(id), accident);
         return "redirect:/";
-    }
+    }*/
 }

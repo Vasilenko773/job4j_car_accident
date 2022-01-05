@@ -19,7 +19,7 @@ public class AccidentMem {
 
     private HashMap<Integer, Accident> accidents = new HashMap<>();
 
-    private final AtomicInteger position = new AtomicInteger(-1);
+    private final AtomicInteger position = new AtomicInteger(0);
 
     public AccidentMem() {
         Accident first = new Accident(1, "First", "авария без жертв", "Варшавского");
