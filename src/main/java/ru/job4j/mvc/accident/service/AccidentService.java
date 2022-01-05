@@ -54,7 +54,6 @@ public class AccidentService {
         return accidentMem.getAllType();
     }
 
-
     public void addRule(Rule rule) {
         rulesMem.addRule(rule);
     }
@@ -69,5 +68,13 @@ public class AccidentService {
 
     public void saveRuleList(String[] array, Accident accident) {
         rulesMem.saveRuleList(array, accident);
+    }
+
+    public void saveOrUpdate(Accident accident) {
+        if (accidentMem.get(accident.getId()) != null) {
+            accidentMem.update(accident.getId(), accident);
+        } else {
+            accidentMem.add(accident);
+        }
     }
 }

@@ -41,11 +41,7 @@ public class AccidentControl {
         service.saveRuleList(ids, accident);
 
         accident.setType(service.getType(id));
-        if (service.get(accident.getId()) != null) {
-            service.updateAccident(accident.getId(), accident);
-        } else {
-            service.add(accident);
-        }
+        service.saveOrUpdate(accident);
         return "redirect:/";
     }
 
