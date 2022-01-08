@@ -1,7 +1,13 @@
 package ru.job4j.mvc.accident.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 
+/*
+В БД указанная сущность входит в состав таблицы rules
+ */
+@Component
 public class Rule {
 
     private int id;

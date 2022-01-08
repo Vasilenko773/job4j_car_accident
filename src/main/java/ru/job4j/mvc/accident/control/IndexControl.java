@@ -23,7 +23,7 @@ public class IndexControl {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("date", service.findByAllAccident());
+        model.addAttribute("date", service.jdbcGetAll());
         return "index";
     }
 }

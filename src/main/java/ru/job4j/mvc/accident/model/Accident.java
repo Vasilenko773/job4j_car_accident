@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 import java.util.Set;
 
+/*
+В БД указанная сущность находится в таблице accidents
+ */
+
 @Component
 public class Accident {
 
@@ -12,6 +16,9 @@ public class Accident {
     private String name;
     private String text;
     private String address;
+    /*
+ Указанное поле ссылается на БД type (type_id)
+     */
     private AccidentType type;
     private Set<Rule> rules;
 
