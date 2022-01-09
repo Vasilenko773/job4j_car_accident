@@ -1,17 +1,17 @@
 package ru.job4j.mvc.accident.repository;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.job4j.mvc.accident.model.Accident;
 import ru.job4j.mvc.accident.model.AccidentType;
 import ru.job4j.mvc.accident.model.Rule;
 
-import java.lang.reflect.Type;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Repository
 public class AccidentJdbcTemplate {

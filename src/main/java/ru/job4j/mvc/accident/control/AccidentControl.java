@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 public class AccidentControl {
 
     private final AccidentService service;
-
     public AccidentControl(AccidentService service) {
         this.service = service;
     }

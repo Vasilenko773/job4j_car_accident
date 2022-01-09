@@ -21,66 +21,10 @@ import java.util.Set;
 @Service
 public class AccidentService {
 
-    @Autowired
-    private AccidentMem accidentMem;
-
-    @Autowired
-    private RulesMem rulesMem;
 
     @Autowired
     private AccidentJdbcTemplate accidentJdbcTemplate;
 
-    public void add(Accident accident) {
-        accidentMem.add(accident);
-    }
-
-    public Accident get(int id) {
-        return accidentMem.get(id);
-    }
-
-    public List<Accident> findByAllAccident() {
-        return accidentMem.getAll();
-    }
-
-    public void addType(AccidentType type) {
-        accidentMem.addType(type);
-    }
-
-    public void updateAccident(int id, Accident accident) {
-        accidentMem.update(id, accident);
-    }
-
-    public AccidentType getType(int id) {
-        return accidentMem.getType(id);
-    }
-
-    public List<AccidentType> findByAllType() {
-        return accidentMem.getAllType();
-    }
-
-    public void addRule(Rule rule) {
-        rulesMem.addRule(rule);
-    }
-
-    public Rule getRule(int id) {
-        return rulesMem.getRule(id);
-    }
-
-    public Set<Rule> findByAllRule() {
-        return rulesMem.getAllRule();
-    }
-
-    public void saveRuleList(String[] array, Accident accident) {
-        rulesMem.saveRuleList(array, accident);
-    }
-
-    public void saveOrUpdate(Accident accident) {
-        if (accidentMem.get(accident.getId()) != null) {
-            accidentMem.update(accident.getId(), accident);
-        } else {
-            accidentMem.add(accident);
-        }
-    }
 
     /**
      * Начало работы d JDbS Template
