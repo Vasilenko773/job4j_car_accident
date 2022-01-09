@@ -3,6 +3,7 @@ package ru.job4j.mvc.accident.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.di.Store;
 import ru.job4j.mvc.accident.model.Accident;
 import ru.job4j.mvc.accident.model.AccidentType;
@@ -64,10 +65,12 @@ public class AccidentService {
     }
 
     public void jdbcUpdate(Accident accident, String[] rules) {
-        accidentJdbcTemplate.deleteRuleSet(jdbcGetAnIdAccident(accident.getName(), accident.getAddress()).getId());
-        jdbcSaveRule(rules, jdbcGetAnIdAccident(accident.getName(), accident.getAddress()).getId());
+        accidentJdbcTemplate.deleteRuleSet(accident.getId());
+        jdbcSaveRule(rules, accident.getId());
+        accidentJdbcTemplate.update(accident);
     }
 
+    @Transactional
     public void jdbcSaveOrUpdate(Accident accident, String[] rules) {
         if (accidentJdbcTemplate.findById(accident.getId()) == null) {
            jdbcSaveAccident(accident, rules);
