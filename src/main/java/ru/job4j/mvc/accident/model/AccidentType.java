@@ -2,14 +2,20 @@ package ru.job4j.mvc.accident.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /*
 В БД указанная сущность называется types
  */
+
+@Entity
+@Table(name = "types")
 @Component
 public class AccidentType {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;

@@ -21,8 +21,8 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("rules", service.jdbcFindAllRule());
-        model.addAttribute("types", service.jdbcFindAllType());
+        model.addAttribute("rules", service.hibernateFindAllRule());
+        model.addAttribute("types", service.hibernateFindAllType());
         return "accident/create";
     }
 
@@ -30,14 +30,14 @@ public class AccidentControl {
     public String save(@ModelAttribute("accident") Accident accident, HttpServletRequest req,
                        @RequestParam("type.id") int id) {
         String[] ids = req.getParameterValues("rIds");
-        service.jdbcSaveOrUpdate(accident, ids);
+        service.hibernateSaveOrUpdateAccident(accident, ids);
         return "redirect:/";
     }
 
     @GetMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model) {
-        model.addAttribute("types", service.jdbcFindAllType());
-        model.addAttribute("accident", service.jdbcFundById(id));
+        model.addAttribute("types", service.hibernateFindAllType());
+        model.addAttribute("accident", service.hibernateFindAccidentById(id));
         return "accident/edit";
     }
 }

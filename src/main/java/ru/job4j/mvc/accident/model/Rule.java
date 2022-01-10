@@ -2,15 +2,22 @@ package ru.job4j.mvc.accident.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /*
 В БД указанная сущность входит в состав таблицы rules
  */
+
+@Entity
+@Table(name = "rules")
 @Component
 public class Rule {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
     public static Rule of(int id, String name) {

@@ -2,6 +2,8 @@ package ru.job4j.mvc.accident.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,9 +11,13 @@ import java.util.Set;
 В БД указанная сущность находится в таблице accidents
  */
 
+@Entity
+@Table(name = "accidents")
 @Component
 public class Accident {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String text;
@@ -19,8 +25,12 @@ public class Accident {
     /*
  Указанное поле ссылается на БД type (type_id)
      */
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private AccidentType type;
-    private Set<Rule> rules;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Rule> rules = new HashSet<>();
 
     public Accident() {
     }
@@ -44,6 +54,10 @@ public class Accident {
         this.text = text;
         this.address = address;
         this.type = type;
+    }
+
+    public void addRule(Rule rule) {
+        this.rules.add(rule);
     }
 
     public static Accident of(int id, String name, String text, String address, AccidentType type, Set<Rule> rules) {

@@ -8,6 +8,7 @@ import ru.job4j.di.Store;
 import ru.job4j.mvc.accident.model.Accident;
 import ru.job4j.mvc.accident.model.AccidentType;
 import ru.job4j.mvc.accident.model.Rule;
+import ru.job4j.mvc.accident.repository.AccidentHibernate;
 import ru.job4j.mvc.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.mvc.accident.repository.AccidentMem;
 import ru.job4j.mvc.accident.repository.RulesMem;
@@ -23,15 +24,13 @@ import java.util.Set;
 public class AccidentService {
 
 
-    @Autowired
+  /*  @Autowired
     private AccidentJdbcTemplate accidentJdbcTemplate;
+    */
+    @Autowired
+    private AccidentHibernate accidentHibernate;
 
-
-    /**
-     * Начало работы d JDbS Template
-     *
-     * @return
-     */
+  /*
     public List<Accident> jdbcGetAll() {
         return accidentJdbcTemplate.jdbcGetAll();
     }
@@ -73,12 +72,34 @@ public class AccidentService {
     @Transactional
     public void jdbcSaveOrUpdate(Accident accident, String[] rules) {
         if (accidentJdbcTemplate.findById(accident.getId()) == null) {
-           jdbcSaveAccident(accident, rules);
+            jdbcSaveAccident(accident, rules);
         } else {
             jdbcUpdate(accident, rules);
         }
+    }*/
+
+    public List<Accident> hibernateFindAllAccident() {
+        return accidentHibernate.getAll();
+    }
+
+    public Accident hibernateFindAccidentById(int id) {
+        return accidentHibernate.findByAccidentById(id);
+    }
+
+    public List<AccidentType> hibernateFindAllType() {
+        return accidentHibernate.findAllType();
+    }
+
+    public List<Rule> hibernateFindAllRule() {
+        return accidentHibernate.findAllRule();
+    }
+
+    @Transactional
+    public void hibernateSaveOrUpdateAccident(Accident accident, String[] rules) {
+        accidentHibernate.saveOrUpdate(accident, rules);
     }
 }
+
 
 
 
