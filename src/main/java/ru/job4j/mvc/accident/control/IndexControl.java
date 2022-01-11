@@ -23,7 +23,7 @@ public class IndexControl {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("date", service.hibernateFindAllAccident());
+        model.addAttribute("date", service.springFindAllAccident());
         return "index";
     }
 }

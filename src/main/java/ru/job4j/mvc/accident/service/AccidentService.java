@@ -1,20 +1,15 @@
 package ru.job4j.mvc.accident.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.job4j.di.Store;
 import ru.job4j.mvc.accident.model.Accident;
 import ru.job4j.mvc.accident.model.AccidentType;
 import ru.job4j.mvc.accident.model.Rule;
-import ru.job4j.mvc.accident.repository.AccidentHibernate;
-import ru.job4j.mvc.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.mvc.accident.repository.AccidentMem;
-import ru.job4j.mvc.accident.repository.RulesMem;
+import ru.job4j.mvc.accident.repository.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Указанынй класс отвечает за логику нашего приложения
@@ -26,9 +21,20 @@ public class AccidentService {
 
   /*  @Autowired
     private AccidentJdbcTemplate accidentJdbcTemplate;
-    */
+
     @Autowired
     private AccidentHibernate accidentHibernate;
+
+   */
+
+    @Autowired
+    private RuleRepository ruleRepository;
+
+    @Autowired
+    private AccidentRepository accidentRepository;
+
+    @Autowired
+    private TypeRepository typeRepository;
 
   /*
     public List<Accident> jdbcGetAll() {
@@ -76,7 +82,9 @@ public class AccidentService {
         } else {
             jdbcUpdate(accident, rules);
         }
-    }*/
+    }
+
+
 
     public List<Accident> hibernateFindAllAccident() {
         return accidentHibernate.getAll();
@@ -97,6 +105,40 @@ public class AccidentService {
     @Transactional
     public void hibernateSaveOrUpdateAccident(Accident accident, String[] rules) {
         accidentHibernate.saveOrUpdate(accident, rules);
+    }
+
+   */
+
+    public List<Rule> springFindAllRule() {
+        List<Rule> rules = new ArrayList<>();
+        ruleRepository.findAll().forEach(rules::add);
+        return rules;
+    }
+
+    public List<AccidentType> springFindAllType() {
+        List<AccidentType> types = new ArrayList<>();
+        typeRepository.findAll().forEach(types::add);
+        return types;
+    }
+
+    public List<Accident> springFindAllAccident() {
+        return accidentRepository.findAll();
+    }
+
+    public Accident springAccidentById(int id) {
+        return accidentRepository.findByIdAccident(id);
+    }
+
+    public Rule springGetRuleById(int id) {
+        return ruleRepository.findById(id).orElse(null);
+    }
+
+    public void springSaveOrUpdate(Accident accident, String[] rules) {
+        accident.getRules().clear();
+        for (String s : rules) {
+            accident.addRule(springGetRuleById(Integer.valueOf(s)));
+        }
+        accidentRepository.save(accident);
     }
 }
 
