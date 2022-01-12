@@ -5,8 +5,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import ru.job4j.mvc.accident.config.DataConfig;
-import ru.job4j.mvc.accident.config.HbmConfig;
 import ru.job4j.mvc.accident.config.WebConfig;
+import ru.job4j.mvc.accident.config.SecurityConfig;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
