@@ -30,12 +30,11 @@ public class RegControl {
         if (users.findByUsername(user.getUsername()) != null) {
             model.addAttribute("errorMessage", "Пользователь с указанны username уже существует, попробуйте снова");
             return "reg";
-        } else {
+        }
             user.setEnabled(true);
             user.setPassword(encoder.encode(user.getPassword()));
             user.setAuthority(authorities.findByAuthority("ROLE_USER"));
             users.save(user);
-        }
         return "redirect:/login";
     }
 
