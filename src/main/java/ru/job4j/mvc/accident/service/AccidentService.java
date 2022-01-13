@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.mvc.accident.model.Accident;
 import ru.job4j.mvc.accident.model.AccidentType;
 import ru.job4j.mvc.accident.model.Rule;
+import ru.job4j.mvc.accident.model.User;
 import ru.job4j.mvc.accident.repository.*;
 
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public class AccidentService {
 
     @Autowired
     private TypeRepository typeRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
   /*
     public List<Accident> jdbcGetAll() {
@@ -140,6 +144,7 @@ public class AccidentService {
         }
         accidentRepository.save(accident);
     }
+
 }
 
 
